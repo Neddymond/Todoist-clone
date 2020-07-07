@@ -230,15 +230,26 @@ header {
   }
 
   &__project {
-    padding: 5px 0;
+    padding: 10px 0;
     cursor: pointer;
+
+    &-name {
+      font-size: 12px;
+    }
 
     &-delete {
       margin-left: auto;
       display: none;
+      float: right;
 
       svg {
         color: #cacaca;
+        
+        font-size: 15px;
+      }
+
+      svg:hover, &.active {
+        color: rgb(251, 25, 25);
       }
     }
 
@@ -351,3 +362,34 @@ header {
   }  
 }
 
+// Show Confirm Delete
+.project-delete-modal {
+  position: relative;
+
+  &__inner {
+    @include box-overlay();
+    z-index: 99;
+    width: 200px;
+    padding: 10px;
+    top: 10px;
+    right: 0;
+    background-color: white;
+
+    p {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      line-height: normal;
+      font-weight: normal;
+      font-size: 13px;
+    }
+
+    button {
+      @include btn("50px");
+    }
+
+    span {
+      @include cancel();
+      font-weight: normal;
+    }
+  }
+}
