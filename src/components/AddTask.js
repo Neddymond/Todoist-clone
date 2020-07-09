@@ -4,6 +4,7 @@ import { FaRegListAlt, FaRegCalendarAlt, FaCalendarAlt } from "react-icons/fa";
 import moment from "moment";
 import { useSelectedProjectValue } from "../context";
 import { ProjectOverlay } from "./ProjectOverlay";
+import { TaskDate } from "./TaskDate";
 
 export const AddTask = ({
   showAddTaskMain = true,
@@ -58,7 +59,7 @@ export const AddTask = ({
             data-testid="show-main-action" 
             onClick={() => setShowMain(!showMain)}>
               <span className="add-task__plus">+</span>
-              <span className="add-text">Add Task</span>
+              <span className="add-task__text">Add Task</span>
           </div>
         )}
 
@@ -85,7 +86,11 @@ export const AddTask = ({
               showProjectOverlay={ showProjectOverlay }
               setShowProjectOverlay={ setShowProjectOverlay }
             />
-            <p>TaskDate here.</p>
+            <TaskDate
+              setTaskDate={ setTaskDate }
+              showTaskDate={ showTaskDate }
+              setShowTaskDate={ setShowTaskDate }
+            />
             <input className="add-task__content"
               data-testid="add-task-content"
               type="text" value={task}
@@ -93,7 +98,10 @@ export const AddTask = ({
             </input>
             <button className="add-task__submit"
               data-testid="add-task"
-              onClick={() => AddTask()}>
+              onClick={() => showQuickAddTask 
+                ? AddTask() && setShowQuickAddTask(false)
+                : AddTask()
+            }>
                 Add Task
             </button>
             {!showQuickAddTask && (
